@@ -112,7 +112,7 @@ class retriever:
             cluster_id = i['x_phonehome_meta_castor_cluster_id']
             hashed_cid = hashlib.md5(cluster_id.encode())
             hashed_cluster = hashed_cid.hexdigest()
-            print ( f"Cluster: {x} : {cluster_id} : {hashed_cluster}" )
+            #print ( f"Cluster: {x} : {cluster_id} : {hashed_cluster}" )
             x += 1
 
             self.uniqueClusters.add(hashed_cid.hexdigest())
