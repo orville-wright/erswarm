@@ -56,12 +56,7 @@ def main():
 
         show_data = retriever(1, args)      # instantiate class
         data_payload = show_data.do_simple_get()
-        print ( f"{data_payload}" )
-
-        #med_large_mega_gainers.get_topg_data()        # extract data from finance.Yahoo.com
-        #x = med_large_mega_gainers.build_tg_df0()     # build full dataframe
-        #med_large_mega_gainers.build_top10()          # show top 10
-        #med_large_mega_gainers.print_top10()          # print it
+        # print ( f"{data_payload}" )t
 
         print ( " " )
 

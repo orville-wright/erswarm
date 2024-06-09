@@ -118,12 +118,12 @@ class retriever:
             self.uniqueClusters.add(hashed_cid.hexdigest())
 
             if hashed_cluster in self.cluster_count:
-                print ( f"Found cluster in count dict - incrementing count..." )
+                #print ( f"Found cluster in count dict - incrementing count..." )
                 y = self.cluster_count[hashed_cluster]
                 y += 1
                 self.cluster_count[hashed_cluster] = y
             else:
-                print ( f"Adding cluster to count dic..." )
+                #print ( f"Adding cluster to count dic..." )
                 self.cluster_count[hashed_cluster] = int(1)
 
         return
