@@ -66,6 +66,8 @@ def main():
 
         show_data.print_cluster_count()
 
+        print ( f"{show_data.global_df0}" )
+
         print ( " " )
 
 #################### exec ######################

@@ -28,6 +28,7 @@ class retriever:
     cycle = 0            # class thread loop counter
     uniqueClusters = 0
     cluster_count = {}
+    global_df0 = ""     # Pandas DataFram for analytics, statistics work
 
 #######################################################################################
 #  SWARM headers
@@ -177,7 +178,6 @@ class retriever:
 
         cmi_debug = __name__+"::"+self.build_df0.__name__+".#"+str(yti)
         self.time_now = time.strftime("%H:%M:%S", time.localtime() )
-        logging.info('%s - Create clean NULL DataFrame' % cmi_debug )
         x = 0
 
         logging.info( f"%s - Build list for Dataframe insert: {clusternum}" % cmi_debug )        # so we can access it natively if needed, without using pandas
