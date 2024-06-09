@@ -161,6 +161,7 @@ class retriever:
         d = 1 
         for j in self.cluster_count:
             print ( f"Cluster #{d:3}  : Unique_cluster: {j} - Ping_enteries: {self.cluster_count[j]}" )
+            self.build_df0(d, j, self.cluster_count[j])
             d += 1
        
         return
