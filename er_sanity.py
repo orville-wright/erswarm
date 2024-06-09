@@ -62,8 +62,6 @@ def main():
 
         show_data.j_clusters(data_payload)
 
-        #show_data.print_unique_clusters()
-
         show_data.print_cluster_count()
 
         pd.set_option('display.max_rows', None)

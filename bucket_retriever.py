@@ -45,7 +45,7 @@ class retriever:
                     "stype": "unnamed",
                     "format": "json",
                     "stype": "all",
-                    "size": "30000",
+                    "size": "3000",
                     "fields": "X-Phonehome-Meta-Castor-Cluster-Id,name,tmBorn",
                     "sort": "X-Phonehome-Meta-Castor-Cluster-Id" }
 
@@ -92,11 +92,11 @@ class retriever:
 # method 2
     def j_clusters(self, jlist ):
         """
-        process some extracted nucket data
-        Must be given a LIST that has JDON encoded data fields
+        process some extracted bucket data
+        Must be given a LIST that has JSON encoded data fields
         Will identify....
-              the unique clsuter ids
-              count how many ping day/entries each cluster has sent to the swarm busket
+              1. the unique clsuter ids
+              2. count how many ping day/entries each cluster has sent to the swarm busket
         """
 
         cmi_debug = __name__+"::"+"_INST.#"+str(self.inst_uid)
@@ -128,7 +128,7 @@ class retriever:
                 #print ( f"Adding cluster to count dic..." )
                 self.cluster_count[hashed_cluster] = int(1)
 
-        print ( f"Total objects processes: {z}" )
+        print ( f"Total objects processed: {z}" )
         return
 
 
