@@ -68,10 +68,11 @@ def main():
 
         pd.set_option('display.max_rows', None)
         print ( f"{show_data.global_df0}" )
-        g_df = pd.DataFrame(show_data.global_df0.sort_values(by=['pingcount'], ascending=True).groupby(['pingcount']) )
+        g_df = pd.DataFrame(show_data.global_df0.sort_values(by=['pingcount'], ascending=True).groupby(['pingcount'])['cluster'].count() )
         #g_df.loc['Averages'] = g_df.mean()
 
-        print ( " " )
+        print ( f"============= grouping ===================" )
+        print ( f"{g_df}" )
 
 #################### exec ######################
 
