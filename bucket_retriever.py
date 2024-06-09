@@ -180,7 +180,7 @@ class retriever:
         logging.info('%s - Create clean NULL DataFrame' % cmi_debug )
         x = 0
 
-        logging.info( f"%s - Build list for Dataframe insert: {self.symbol}" % cmi_debug )        # so we can access it natively if needed, without using pandas
+        logging.info( f"%s - Build list for Dataframe insert: {clusternum}" % cmi_debug )        # so we can access it natively if needed, without using pandas
         self.data0 = [[ \
             clusternum, \
             clusterhash, \
