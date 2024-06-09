@@ -107,6 +107,7 @@ class retriever:
 
         x = 1
         c = 1
+        z = 0
 
         for i in self.jdata:
             cluster_id = i['x_phonehome_meta_castor_cluster_id']
@@ -114,6 +115,7 @@ class retriever:
             hashed_cluster = hashed_cid.hexdigest()
             #print ( f"Cluster: {x} : {cluster_id} : {hashed_cluster}" )
             x += 1
+            z += 1
 
             self.uniqueClusters.add(hashed_cid.hexdigest())
 
@@ -126,6 +128,7 @@ class retriever:
                 #print ( f"Adding cluster to count dic..." )
                 self.cluster_count[hashed_cluster] = int(1)
 
+        print ( f"Total objects processes: {z}" )
         return
 
 
@@ -156,11 +159,9 @@ class retriever:
         cmi_debug = __name__+"::"+"_INST.#"+str(self.inst_uid)
         logging.info('%s - Print clusters count' % cmi_debug )
 
-        z = 0
         d = 1 
         for j in self.cluster_count:
             print ( f"Cluster #{d:3}  : Unique cluster: {j} - Ping enteries: {self.cluster_count[j]}" )
             d += 1
-            z += 1
        
         return
