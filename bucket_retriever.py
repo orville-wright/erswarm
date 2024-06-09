@@ -159,17 +159,19 @@ class retriever:
         cmi_debug = __name__+"::"+"_INST.#"+str(self.inst_uid)
         logging.info('%s - Print clusters count' % cmi_debug )
 
+        idx = 0
         d = 1 
         for j in self.cluster_count:
             print ( f"Cluster #{d:3}  : Unique_cluster: {j} - Ping_enteries: {self.cluster_count[j]}" )
-            self.build_df0(1, d, j, self.cluster_count[j])
+            self.build_df0(1, idx, d, j, self.cluster_count[j])
             d += 1
+            idx += 1
        
         return
 
 ######################################################################
 # method 5
-    def build_df0(self, yti, clusternum, clusterhash, pingcount):
+    def build_df0(self, yti, idx, clusternum, clusterhash, pingcount):
         """
         Build-out a fully populated Pandas DataFrame containg key fields
         This will allow us to do intersting statistical/math analytics on the data using Pandas
@@ -190,7 +192,7 @@ class retriever:
         logging.info( f"%s - Prepare DF for new cluster entry: {clusternum}" % cmi_debug )
         # convert our list into a 1 row dataframe
         # self.df0_new_row = pd.DataFrame(self.data0, columns=[ 'Row', 'Symbol', 'Co_name', 'Cur_price', 'Prc_change', 'Pct_change', 'Mkt_cap', 'M_B', 'Time' ], index=[x] )
-        self.df0_new_row = pd.DataFrame(self.data0, columns=[ 'cluster', 'Uniqueid', 'pingcount', 'Time' ] )
+        self.df0_new_row = pd.DataFrame(self.data0, columns=[ 'cluster', 'Uniqueid', 'days_pinged', 'Time_now' ], index=[idx] )
 
         self.global_df0 = pd.concat([self.global_df0, self.df0_new_row])
         logging.info('%s - Cluster DF entry created' % cmi_debug )
