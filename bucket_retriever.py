@@ -110,27 +110,23 @@ class retriever:
         z = 0
 
         for i in self.jdata:
-            cluster_id = i['x_phonehome_meta_castor_cluster_id']
-            hashed_cid = hashlib.md5(cluster_id.encode())
-            hashed_cluster = hashed_cid.hexdigest()
-            #print ( f"Cluster: {x} : {cluster_id} : {hashed_cluster}" )
+            cluster_id = i['x_phonehome_meta_castor_cluster_id']    # k8s cluster id is a veerrrry long numbers
+            hashed_cid = hashlib.md5(cluster_id.encode())           # use crypto hash to make a shorter but unique number from k8s cluster id
+            hashed_cluster = hashed_cid.hexdigest()                 # generate a short unique cluster id from the long k8s cluster id
             x += 1
             z += 1
 
             self.uniqueClusters.add(hashed_cid.hexdigest())
 
-            if hashed_cluster in self.cluster_count:
-                #print ( f"Found cluster in count dict - incrementing count..." )
-                y = self.cluster_count[hashed_cluster]
-                y += 1
-                self.cluster_count[hashed_cluster] = y
+            if hashed_cluster in self.cluster_count:          # does this cluster id allready exist in our tracking DICT?
+                y = self.cluster_count[hashed_cluster]        # get the num of times we've seen iot so far
+                y += 1                                        # incr count
+                self.cluster_count[hashed_cluster] = y        # update new count
             else:
-                #print ( f"Adding cluster to count dic..." )
-                self.cluster_count[hashed_cluster] = int(1)
+                self.cluster_count[hashed_cluster] = int(1)   # add new cluster id into tracking DICT, with count = 1
 
         print ( f"Total objects processed: {z}" )
         return
-
 
 ######################################################################
 # method 3
@@ -151,18 +147,20 @@ class retriever:
 
 ######################################################################
 # method 4
-    def print_cluster_count(self):
+    def gen_cluster_count(self, prt_status):
         """
-        print the count of unique clusters
+        Generate the count of unique clusters
         """
 
         cmi_debug = __name__+"::"+"_INST.#"+str(self.inst_uid)
-        logging.info('%s - Print clusters count' % cmi_debug )
+        logging.info('%s - Generate cluster count' % cmi_debug )
 
         idx = 0
         d = 1 
         for j in self.cluster_count:
-            print ( f"Cluster #{d:3}  : Unique_cluster: {j} - Ping_enteries: {self.cluster_count[j]}" )
+            if prt_status == 1:             # be verbose and display progress of what we're doing
+                print ( f"Cluster #{d:3}  : Unique_cluster: {j} - Ping_enteries: {self.cluster_count[j]}" )
+
             self.build_df0(1, idx, d, j, self.cluster_count[j])
             d += 1
             idx += 1

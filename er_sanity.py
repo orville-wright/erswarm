@@ -26,7 +26,8 @@ args = {}
 
 global parser
 parser = argparse.ArgumentParser(description="Ed's Mayadata Metrics Sanity checker")
-parser.add_argument('-s','--show', help='show some bucket data', action='store_true', dest='bool_show', required=False, default=False)
+parser.add_argument('-s','--scan', help='scan swarm bucket data', action='store_true', dest='bool_scan', required=False, default=False)
+parser.add_argument('-t','--token', help='Swarm bucket token to use', action='store_true', dest='swarm_token', required=True, default=False)
 parser.add_argument('-v','--verbose', help='verbose error logging', action='store_true', dest='bool_verbose', required=False, default=False)
 parser.add_argument('-x','--xray', help='dump Xray debug data structures', action='store_true', dest='bool_xray', required=False, default=False)
 
@@ -51,22 +52,19 @@ def main():
 
 
 ########## 1 - GET BUCKET DATA  ################
-    if args['bool_show'] is True:
-        print ( "========== Show Bucket data / a few rows ===============================" )
+    if args['bool_scan'] is True:
+        print ( "======================= Scan Swarm Bucket data  ===============================" )
 
-        show_data = retriever(1, args)      # instantiate class
-        data_payload = show_data.do_simple_get()
-        # print ( f"{data_payload}" )t
-
+        scan_data = retriever(1, args)      # instantiate class
+        data_payload = scan_data.do_simple_get()
         print ( " " )
+        scan_data.j_clusters(data_payload)
 
-        show_data.j_clusters(data_payload)
-
-        show_data.print_cluster_count()
+        scan_data.gen_cluster_count(0)      # 0 = be silent, dont display progress / 1 = display progress
 
         pd.set_option('display.max_rows', None)
-        print ( f"{show_data.global_df0}" )
-        g_df = pd.DataFrame(show_data.global_df0.sort_values(by=['days_pinged'], ascending=True).groupby(['days_pinged'])['cluster'].count() )
+        print ( f"{scan_data.global_df0}" )
+        g_df = pd.DataFrame(scan_data.global_df0.sort_values(by=['days_pinged'], ascending=True).groupby(['days_pinged'])['cluster'].count() )
         #g_df.loc['Averages'] = g_df.mean()
 
         print ( f"============= grouping ===================" )
