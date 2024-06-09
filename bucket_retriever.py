@@ -103,7 +103,7 @@ class retriever:
         logging.info('%s - Processing a list of extracted data' % cmi_debug )
         self.jdata = json.loads(jlist)
 
-        print ( f"Extracted elemts from bucket: %s" % len(self.jdata) )
+        print ( f"Extracted elements from bucket: %s" % len(self.jdata) )
 
         x = 1
         c = 1
@@ -154,11 +154,13 @@ class retriever:
         """
 
         cmi_debug = __name__+"::"+"_INST.#"+str(self.inst_uid)
-        logging.info('%s - Print unique clusters list' % cmi_debug )
+        logging.info('%s - Print clusters count' % cmi_debug )
 
+        z = 0
         d = 1 
         for j in self.cluster_count:
             print ( f"Cluster #{d:3}  : Unique cluster: {j} - Ping enteries: {self.cluster_count[j]}" )
             d += 1
-        
+            z += 1
+       
         return
