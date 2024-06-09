@@ -161,21 +161,21 @@ class retriever:
         d = 1 
         for j in self.cluster_count:
             print ( f"Cluster #{d:3}  : Unique_cluster: {j} - Ping_enteries: {self.cluster_count[j]}" )
-            self.build_df0(d, j, self.cluster_count[j])
+            self.build_df0(1, d, j, self.cluster_count[j])
             d += 1
        
         return
 
 ######################################################################
 # method 5
-    def build_df0(self, clusternum, clusterhash, pingcount):
+    def build_df0(self, yti, clusternum, clusterhash, pingcount):
         """
         Build-out a fully populated Pandas DataFrame containg key fields
         This will allow us to do intersting statistical/math analytics on the data using Pandas
         translations rathe than dict,list,set python code
         """
 
-        cmi_debug = __name__+"::"+self.build_df0.__name__+".#"+str(self.yti)
+        cmi_debug = __name__+"::"+self.build_df0.__name__+".#"+str(yti)
         self.time_now = time.strftime("%H:%M:%S", time.localtime() )
         logging.info('%s - Create clean NULL DataFrame' % cmi_debug )
         x = 0
