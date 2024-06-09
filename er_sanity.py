@@ -71,6 +71,8 @@ def main():
 
         print ( f"{show_data.cluster_count}" )
 
+        print ( f"{show_data.print_cluster_count}" )
+
         print ( " " )
 
 #################### exec ######################
