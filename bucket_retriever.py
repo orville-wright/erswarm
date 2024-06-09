@@ -44,7 +44,7 @@ class retriever:
                     "stype": "unnamed",
                     "format": "json",
                     "stype": "all",
-                    "size": "200",
+                    "size": "20000",
                     "fields": "X-Phonehome-Meta-Castor-Cluster-Id,name,tmBorn",
                     "sort": "X-Phonehome-Meta-Castor-Cluster-Id" }
 
@@ -161,7 +161,7 @@ class retriever:
 
         d = 1 
         for j in self.cluster_count:
-            print ( f"Cluster #{d:3}  : Unique cluster: {j} - Ping enteries: {self.cluster_count[j]}" )
+            print ( f"Cluster #{d:3}  : Unique_cluster: {j} - Ping_enteries: {self.cluster_count[j]}" )
             d += 1
        
         return
