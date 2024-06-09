@@ -66,7 +66,10 @@ def main():
 
         show_data.print_cluster_count()
 
+        pd.set_option('display.max_rows', None)
         print ( f"{show_data.global_df0}" )
+        g_df = pd.DataFrame(show_data.global_df0.sort_values(by=['pingcount'], ascending=True).groupby(['pingcount']).mean() )
+        g_df.loc['Averages'] = g_df.mean()
 
         print ( " " )
 
