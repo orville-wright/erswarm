@@ -52,13 +52,12 @@ class retriever:
         cmi_debug = __name__+"::"+self.__init__.__name__
         self.args = global_args
         logging.info( f'%s - Instantiate.#{yti}' % cmi_debug )
-        # init empty DataFrame with present colum names
-        #self.tg_df0 = pd.DataFrame(columns=[ 'Row', 'Symbol', 'Co_name', 'Cur_price', 'Prc_change', 'Pct_change', 'Mkt_cap', 'M_B', 'Time'] )
+        # init empty Class Global DataFrame
+        self.global_df0 = pd.DataFrame()                   # new df, but is NULLed
         self.inst_uid = yti
-        ##self.js_session = HTMLSession()                        # init JAVAScript processor early
         self.session = requests.Session()
         self.uniqueClusters = set()
-        cluster_count = dict()
+        self.cluster_count = dict()
 
         return
 
@@ -165,3 +164,35 @@ class retriever:
             d += 1
        
         return
+
+######################################################################
+# method 5
+    def build_df0(self, clusternum, clusterhash, pingcount):
+        """
+        Build-out a fully populated Pandas DataFrame containg key fields
+        This will allow us to do intersting statistical/math analytics on the data using Pandas
+        translations rathe than dict,list,set python code
+        """
+
+        cmi_debug = __name__+"::"+self.build_df0.__name__+".#"+str(self.yti)
+        self.time_now = time.strftime("%H:%M:%S", time.localtime() )
+        logging.info('%s - Create clean NULL DataFrame' % cmi_debug )
+        x = 0
+
+        logging.info( f"%s - Build list for Dataframe insert: {self.symbol}" % cmi_debug )        # so we can access it natively if needed, without using pandas
+        self.data0 = [[ \
+            clusternum, \
+            clusterhash, \
+            pingcount, \
+            self.time_now ]]
+
+        logging.info( f"%s - Prepare DF for new cluster entry: {clusternum}" % cmi_debug )
+        # convert our list into a 1 row dataframe
+        # self.df0_new_row = pd.DataFrame(self.data0, columns=[ 'Row', 'Symbol', 'Co_name', 'Cur_price', 'Prc_change', 'Pct_change', 'Mkt_cap', 'M_B', 'Time' ], index=[x] )
+        self.df0_new_row = pd.DataFrame(self.data0, columns=[ 'cluster', 'Uniqueid', 'pingcount', 'Time' ] )
+
+        self.global_df0 = pd.concat([self.global_df0, self.df0_new_row])
+        logging.info('%s - Cluster DF entry created' % cmi_debug )
+        x+=1
+
+        return 0
