@@ -45,7 +45,7 @@ class retriever:
                     "stype": "unnamed",
                     "format": "json",
                     "stype": "all",
-                    "size": "5000",
+                    "size": "30000",
                     "fields": "X-Phonehome-Meta-Castor-Cluster-Id,name,tmBorn",
                     "sort": "X-Phonehome-Meta-Castor-Cluster-Id" }
 
