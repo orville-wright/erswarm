@@ -144,10 +144,21 @@ class retriever:
             print ( f"Cluster #{c:3}  : Unique cluster: {i}" )
             c += 1
 
+        return
+
+######################################################################
+# method 4
+    def print_cluster_count(self):
+        """
+        print the count of unique clusters
+        """
+
+        cmi_debug = __name__+"::"+"_INST.#"+str(self.inst_uid)
+        logging.info('%s - Print unique clusters list' % cmi_debug )
+
         d = 1 
         for j in self.cluster_count:
             print ( f"Cluster #{d:3}  : Unique cluster: {j} - Ping enteries: {self.cluster_count[j]}" )
             d += 1
         
-
         return
