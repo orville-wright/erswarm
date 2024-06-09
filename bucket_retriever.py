@@ -27,6 +27,7 @@ class retriever:
     args = []            # class dict to hold global args being passed in from main() methods
     cycle = 0            # class thread loop counter
     uniqueClusters = 0
+    cluster_count = {}
 
 #######################################################################################
 #  SWARM headers
@@ -57,6 +58,7 @@ class retriever:
         ##self.js_session = HTMLSession()                        # init JAVAScript processor early
         self.session = requests.Session()
         self.uniqueClusters = set()
+        cluster_count = dict()
 
         return
 
@@ -91,7 +93,10 @@ class retriever:
     def j_clusters(self, jlist ):
         """
         process some extracted nucket data
-        should be given a LIST that has JDON encoded data fields
+        Must be given a LIST that has JDON encoded data fields
+        Will identify....
+              the unique clsuter ids
+              count how many ping day/entries each cluster has sent to the swarm busket
         """
 
         cmi_debug = __name__+"::"+"_INST.#"+str(self.inst_uid)
@@ -100,16 +105,26 @@ class retriever:
 
         print ( f"Extracted elemts from bucket: %s" % len(self.jdata) )
 
-        x =  1
+        x = 1
+        c = 1
 
         for i in self.jdata:
             cluster_id = i['x_phonehome_meta_castor_cluster_id']
             hashed_cid = hashlib.md5(cluster_id.encode())
-            print ( f"Cluster: {x} : {cluster_id} : {hashed_cid.hexdigest()}" )
+            hashed_cluster = hashed_cid.hexdigest()
+            print ( f"Cluster: {x} : {cluster_id} : {hashed_cluster}" )
             x += 1
 
             self.uniqueClusters.add(hashed_cid.hexdigest())
 
+            if hashed_cluster in self.cluster_count:
+                print ( f"Found cluster in count dict - incrementing count..." )
+                y = self.cluster_count[hashed_cluster]
+                y += 1
+                self.cluster_count[hashed_cluster] = y
+            else:
+                print ( f"Adding cluster to count dic..." )
+                self.cluster_count[hashed_cluster] = int(1)
 
         return
 
@@ -126,7 +141,13 @@ class retriever:
        
         c = 1 
         for i in self.uniqueClusters:
-            print ( f"Unique Cluster #{c}  : ID: {i}" )
+            print ( f"Cluster #{c:3}  : Unique cluster: {i}" )
             c += 1
+
+        d = 1 
+        for j in self.cluster_count:
+            print ( f"Cluster #{d:3}  : Unique cluster: {j} - Ping enteries: {self.cluster_count[j]}" )
+            d += 1
+        
 
         return

@@ -69,6 +69,8 @@ def main():
 
         show_data.print_unique_clusters()
 
+        print ( f"{show_data.cluster_count}" )
+
         print ( " " )
 
 #################### exec ######################
