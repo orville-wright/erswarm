@@ -27,7 +27,7 @@ args = {}
 global parser
 parser = argparse.ArgumentParser(description="Ed's Mayadata Metrics Sanity checker")
 parser.add_argument('-s','--scan', help='scan swarm bucket data', action='store_true', dest='bool_scan', required=False, default=False)
-parser.add_argument('-t','--token', help='Swarm bucket token to use', action='store_true', dest='swarm_token', required=True, default=False)
+parser.add_argument('-t','--token', help='Swarm bucket token to use', action='store', dest='swarm_token', required=True, default=False)
 parser.add_argument('-v','--verbose', help='verbose error logging', action='store_true', dest='bool_verbose', required=False, default=False)
 parser.add_argument('-x','--xray', help='dump Xray debug data structures', action='store_true', dest='bool_xray', required=False, default=False)
 
@@ -50,7 +50,7 @@ def main():
 
     if args['swarm_token'] is not False:
         use_token = args['swarm_token']
-        print ( f"using Bucket token: {use_token} ")
+        print ( f"using Bucket token: {use_token}" )
 
     print ( " " )
 
