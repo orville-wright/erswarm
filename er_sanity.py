@@ -48,6 +48,10 @@ def main():
     else:
         logging.disable(20)                 # Log lvel = INFO
 
+    if args['swarm_token'] is not False:
+        use_token = args['swarm_token']
+        print ( f"using Bucket token: {use_token} ")
+
     print ( " " )
 
 
@@ -55,7 +59,8 @@ def main():
     if args['bool_scan'] is True:
         print ( "======================= Scan Swarm Bucket data  ===============================" )
 
-        scan_data = retriever(1, args)      # instantiate class
+        scan_data = retriever(1, use_token, args)      # instantiate class
+
         data_payload = scan_data.do_simple_get()
         print ( " " )
         scan_data.j_clusters(data_payload)
