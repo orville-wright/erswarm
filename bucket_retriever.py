@@ -29,13 +29,13 @@ class retriever:
     uniqueClusters = 0
     cluster_count = {}
     global_df0 = ""     # Pandas DataFram for analytics, statistics work
+    token = {}
 
 #######################################################################################
 #  SWARM headers
 
     url = "https://openebs-phonehome.cloud.datacore.com"
 
-    token = {"token": token }
 
     swarm_headers = {
                     "domain": "openebs-phonehome.cloud.datacore.com",
