@@ -26,6 +26,8 @@ args = {}
 
 global parser
 parser = argparse.ArgumentParser(description="Ed's Mayadata Metrics Sanity checker")
+parser.add_argument('-a','--analytics', help='Print analytics data', action='store_true', dest='bool_alyts', required=False, default=False)
+parser.add_argument('-h','--histogram', help='Print cluster/ping histogram', action='store_true', dest='bool_phist', required=False, default=False)
 parser.add_argument('-s','--scan', help='scan swarm bucket data', action='store_true', dest='bool_scan', required=False, default=False)
 parser.add_argument('-t','--token', help='Swarm bucket token to use', action='store', dest='swarm_token', required=True, default=False)
 parser.add_argument('-v','--verbose', help='verbose error logging', action='store_true', dest='bool_verbose', required=False, default=False)
@@ -67,10 +69,15 @@ def main():
 
         scan_data.gen_cluster_count(0)      # 0 = be silent, dont display progress / 1 = display progress
 
+    if args['bool_alyts'] is True:
+        print ( "======================= Dump analytics data  ===============================" )
+
         pd.set_option('display.max_rows', None)
         print ( f"{scan_data.global_df0}" )
         g_df = pd.DataFrame(scan_data.global_df0.sort_values(by=['days_pinged'], ascending=True).groupby(['days_pinged'])['cluster'].count() )
-        #g_df.loc['Averages'] = g_df.mean()
+
+    if args['bool_phist'] is True:
+        print ( "======================= Dump Cluster/Ping historgam stats  ===============================" )
 
         print ( f"============= grouping ===================" )
         print ( f"{g_df}" )
