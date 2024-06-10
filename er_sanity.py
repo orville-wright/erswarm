@@ -50,7 +50,7 @@ def main():
 
     if args['swarm_token'] is not False:
         use_token = args['swarm_token']
-        print ( f"using Bucket token: {use_token}" )
+        print ( f"using bucket token: {use_token}" )
 
     print ( " " )
 

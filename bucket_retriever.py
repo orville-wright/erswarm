@@ -29,7 +29,6 @@ class retriever:
     uniqueClusters = 0
     cluster_count = {}
     global_df0 = ""     # Pandas DataFram for analytics, statistics work
-    token = ""
 
 #######################################################################################
 #  SWARM headers
@@ -48,7 +47,7 @@ class retriever:
                     "fields": "X-Phonehome-Meta-Castor-Cluster-Id,name,tmBorn",
                     "sort": "X-Phonehome-Meta-Castor-Cluster-Id" }
 
-    def __init__(self, yti, token, global_args):
+    def __init__(self, yti, t, global_args):
         cmi_debug = __name__+"::"+self.__init__.__name__
         self.args = global_args
         logging.info( f'%s - Instantiate.#{yti}' % cmi_debug )
@@ -58,7 +57,7 @@ class retriever:
         self.session = requests.Session()
         self.uniqueClusters = set()
         self.cluster_count = dict()
-        self.token = token
+        self.token = {"token": t }
 
         return
 
