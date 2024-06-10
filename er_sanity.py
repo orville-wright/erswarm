@@ -27,7 +27,7 @@ args = {}
 global parser
 parser = argparse.ArgumentParser(description="Ed's Mayadata Metrics Sanity checker")
 parser.add_argument('-a','--analytics', help='Print analytics data', action='store_true', dest='bool_alyts', required=False, default=False)
-parser.add_argument('-h','--histogram', help='Print cluster/ping histogram', action='store_true', dest='bool_phist', required=False, default=False)
+parser.add_argument('-p','--pingstats', help='Print cluster/ping stats', action='store_true', dest='bool_phist', required=False, default=False)
 parser.add_argument('-s','--scan', help='scan swarm bucket data', action='store_true', dest='bool_scan', required=False, default=False)
 parser.add_argument('-t','--token', help='Swarm bucket token to use', action='store', dest='swarm_token', required=True, default=False)
 parser.add_argument('-v','--verbose', help='verbose error logging', action='store_true', dest='bool_verbose', required=False, default=False)
